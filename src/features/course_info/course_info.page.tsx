@@ -15,7 +15,7 @@ export default function CourseInfoPage() {
           {desc}
         </p>
 
-        <NavLink to={"/player"} state={{ courseId: course }}>
+        <NavLink to={"/player"} state={{ courseId: course, video: 0 }}>
           <Button className="w-full md:w-56 min-w-32 uppercase py-7 mb-10">
             Iniciar curso
           </Button>

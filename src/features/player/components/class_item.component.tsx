@@ -16,7 +16,7 @@ export function ClassItemComponent({
   return (
     <NavLink
       to={"/player"}
-      state={{ course: course, class: link }}
+      state={{ courseId: course, video: link }}
       className={clsx(
         selected && "bg-neutral-200",
         "py-3 border-b-[.5px] border-b-neutral-200 hover:bg-neutral-200 pl-10"
