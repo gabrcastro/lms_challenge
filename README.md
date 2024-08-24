@@ -1,5 +1,11 @@
 # LMS
 
+<center>
+    <div style="width: 80%;">
+        <img src="./docs//images/auth.png" >
+    </div>
+</center>
+
 ### Bibliotecas utilizadas
 
 - [TanStack Query]("https://tanstack.com/query/latest")
@@ -10,6 +16,6 @@
 - [Lucide Icons]("https://lucide.dev/icons/")
 - [React Router Dom]("https://reactrouter.com/en/main")
 
-### Erros
+#### Anotações
 
-- gapi : alguns navegadores como o Chrome bloqueiam todos os cookies de terceiros por padrão.
+> gapi : alguns navegadores como o Chrome bloqueiam todos os cookies de terceiros por padrão.
