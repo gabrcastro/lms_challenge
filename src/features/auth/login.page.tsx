@@ -29,10 +29,10 @@ export function LoginPage() {
       </Button>
 
       <p className="">ou</p>
-      <Button variant={"outline"} className="w-full flex gap-4">
+      {/* <Button variant={"outline"} className="w-full flex gap-4">
         <img src="/public/google.svg" alt="" className="size-5" />
         Entrar com conta do Google
-      </Button>
+      </Button> */}
       <LoginWithGoogle />
     </div>
   );
