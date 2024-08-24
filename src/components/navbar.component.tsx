@@ -17,12 +17,34 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 import { Button } from "./ui/button";
 import clsx from "clsx";
+import { useAuthStore } from "@/state/auth.store";
+import { userSignOut } from "@/data/services/auth.service";
 
 export function NavBarComponent() {
   const location = useLocation();
   const currentPath = location.pathname;
+
+  const { setToken } = useAuthStore();
+
+  async function handleSignOut() {
+    await userSignOut();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setToken(null);
+      window.location.href = "/";
+    }
+  }
 
   return (
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -133,7 +155,35 @@ export function NavBarComponent() {
               <NavLink to="/settings">Configurações</NavLink>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Sair</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant={"ghost"}
+                    className="w-full p-2 hover:cursor-pointer"
+                  >
+                    <span className="text-start font-normal w-full">Sair</span>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Deseja realmente sair?</DialogTitle>
+                    <DialogDescription>
+                      Se sair, será necessário entrar novamente na sua conta.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <Button
+                      type="submit"
+                      variant={"destructive"}
+                      onClick={handleSignOut}
+                    >
+                      Sim, quero sair
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
