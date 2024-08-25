@@ -20,10 +20,10 @@ Se você tem acesso a este repositório, provavelmente tem acesso as variáveis 
 
 Basta adicionar um arquivo chamado <strong>.env</strong> no projeto juntamente com os valores e os nomes corretamente. Segue abaixo um exemplo. No arquivo existe um arquivo <strong>.env.example</strong> com o código abaixo para facilitar.
 
-> FIREBASE_API_KEY = "firebase_apikey" <br>
-> YT_API_KEY = "yt_apikey" <br>
-> YT_API_URL = "url" <br>
-> YT_CHANNEL_ID = "channel_id" <br>
+> VITE_FIREBASE_API_KEY = "firebase_apikey" <br>
+> VITE_YT_API_KEY = "yt_apikey" <br>
+> VITE_YT_API_URL = "url" <br>
+> VITE_YT_CHANNEL_ID = "channel_id" <br>
 
 #### Rodar o projeto
 

@@ -20,6 +20,8 @@ Para testar a aplicação siga as instruções [aqui](./docs/installing.md)
 - [Lucide Icons]("https://lucide.dev/icons/")
 - [React Router Dom]("https://reactrouter.com/en/main")
 - [Firebase Authentication]("https://firebase.google.com/docs/auth")
+- [React Testing Library]("https://testing-library.com/docs/react-testing-library/intro/")
+- [Vitest]("https://vitest.dev/guide/")
 
 #### Anotações
 
