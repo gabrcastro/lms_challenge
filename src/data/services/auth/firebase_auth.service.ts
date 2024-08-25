@@ -1,5 +1,9 @@
 import { authFirebase } from "@/config/firebase.config";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 
@@ -33,6 +37,16 @@ export function googleSignIn(): Promise<void> {
       console.error("credential", credential);
       // ...
     });
+}
+export async function signIn(email: string, password: string) {
+  try {
+    const auth = authFirebase;
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    const token = await result.user.getIdToken();
+    if (token) localStorage.setItem("token", token);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export async function userSignOut() {
