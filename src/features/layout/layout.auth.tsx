@@ -12,7 +12,7 @@ export default function LayoutAuth() {
           <PlaySquareIcon className="h-6 w-6" />
           <span className="">MegaNews LMS</span>
         </NavLink>
-        <img src="/public/learning.png" alt="" className="w-[60%] h-[60%]" />
+        <img src="/learning.png" alt="" className="w-[60%] h-[60%]" />
       </div>
       <div className="w-full md:w-2/3">
         <Outlet />

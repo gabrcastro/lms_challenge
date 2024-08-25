@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import { NavLink } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchPlaylists } from "@/data/services/video.services";
+import { fetchPlaylists } from "@/data/services/api/video.services";
 import { PlaylistListResponse } from "@/data/@types/playlists.types";
 import { Skeleton } from "@/components/ui/skeleton";
 

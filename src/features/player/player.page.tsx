@@ -1,79 +1,83 @@
 import { useLocation } from "react-router-dom";
-import { ClassItemComponent } from "./components/class_item.component";
-import { fetchPlaylistById } from "@/data/services/video.services";
+// import { ClassItemComponent } from "./components/class_item.component";
+import { fetchPlaylistById } from "@/data/services/api/video.services";
 import { useQuery } from "@tanstack/react-query";
 import { PlaylistItemListResponse } from "@/data/@types/playlist.types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { NavBarPlayerComponent } from "@/components/navbar_player.component";
+import CommentSection from "./components/comments.component";
+import { useCourseStore } from "@/state/course.store";
+import { MenuComponent } from "./components/menu.component";
+import { TopBarPlayerComponent } from "./components/topbar_player.component";
 
 export default function PlayerPage() {
   const location = useLocation();
-  const { courseId } = location.state || {};
+  const { courseId, title } = location.state || {};
 
   const { data, isLoading } = useQuery<PlaylistItemListResponse>({
     queryKey: ["playlistById", courseId],
     queryFn: () => fetchPlaylistById(courseId),
   });
 
-  const [selectedVideo, setSelectedVideo] = useState<string>(
-    localStorage.getItem("selectedVideo") ?? "0"
-  );
+  const { selectedVideo } = useCourseStore();
+
+  console.log(selectedVideo);
 
   useEffect(() => {
-    if (data?.items.length == null || data?.items.length == undefined) return;
-
-    const video = localStorage.getItem("selectedVideo");
-
-    if (video != null) {
-      setSelectedVideo(video);
+    if (data?.items.length == null || data?.items.length == undefined) {
+      return;
     } else {
-      setSelectedVideo(String(data?.items.length));
+      localStorage.setItem("playlistLength", data?.items.length.toString());
     }
   }, [data]);
 
-  const handleVideoChange = (position: number) => {
-    setSelectedVideo(position.toString());
-    localStorage.setItem("selectedVideo", position.toString());
-  };
-
-  useEffect(() => {
-    console.log(">>>> ", selectedVideo);
-  }, [selectedVideo]);
-
   return (
-    <main className="flex flex-col md:flex-row w-full h-full overflow-y-auto">
-      <div className="w-full h-full flex items-startjustify-center overflow-y-auto">
-        {/* <img
-          src={data?.items[0].snippet.thumbnails.maxres.url}
-          alt=""
-          className="rounded-lg w-[80%] items-center justify-center"
-        /> */}
-        {isLoading ? (
-          <Skeleton className="rounded-lg p-10 w-full h-[90%] items-center justify-center" />
-        ) : (
-          <iframe
-            title="videoplayer"
-            src={`https://www.youtube.com/embed/watch?v=tLKFoubznek&list=${courseId}&index=${selectedVideo}`}
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture;"
-            allowFullScreen
-            className="rounded-lg p-10 w-full h-[90%] items-center justify-center"
-          />
-        )}
-      </div>
-      <div className="flex flex-col pt-10 pb-32 border-l-[.5px] border-l-neutral-300 text-sm h-screen overflow-y-auto min-w-96 w-full md:w-96 mt-10 md:mt-0">
-        <span className="text-lg font-medium text-neutral-900 pl-10 mb-7">
-          Lista de aulas
-        </span>
+    <div className="w-full h-full overflow-hidden">
+      <NavBarPlayerComponent playlist={data?.items} />
+      <main className="w-full h-full overflow-y-auto">
+        <div className="flex flex-col md:flex-row w-full h-full overflow-y-auto">
+          <div className="w-full h-full flex items-startjustify-center overflow-y-auto">
+            {isLoading ? (
+              <Skeleton className="w-full h-[90%] items-center justify-center" />
+            ) : (
+              <div className="w-full h-screen overflow-y-auto">
+                <TopBarPlayerComponent title={title} />
+                <iframe
+                  title="videoplayer"
+                  src={`https://www.youtube.com/embed/watch?v=tLKFoubznek&list=${courseId}&index=${selectedVideo}`}
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture;"
+                  allowFullScreen
+                  className="w-full h-max md:h-[70%] items-center justify-center"
+                />
 
-        {data?.items.map((item) => (
-          <ClassItemComponent
-            key={item.id}
-            selected={+selectedVideo == item.snippet.position + 1}
-            title={item.snippet.title}
-            onClick={() => handleVideoChange(item.snippet.position + 1)}
-          />
-        ))}
-      </div>
-    </main>
+                <div className="px-2 py-5 md:py-10 md:px-10 flex flex-col items-start justify-start w-full h-full">
+                  <p className="text-sm font-medium mb-10">Tire dúvidas</p>
+
+                  <CommentSection />
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="hidden md:flex flex-col pt-1 md:pt-10 pb-32 border-l-[.5px] border-l-neutral-300 text-sm h-screen overflow-y-auto min-w-96 w-full md:w-96 mt-10 md:mt-0">
+            <span className="text-lg font-medium text-neutral-900 pl-10 mb-7">
+              Lista de aulas
+            </span>
+            <MenuComponent data={data?.items} />
+          </div>
+
+          {/* <div className="hidden md:flex flex-col pt-1 md:pt-10 pb-32 border-l-[.5px] border-l-neutral-300 text-sm h-screen overflow-y-auto min-w-96 w-full md:w-96 mt-10 md:mt-0">
+            <span className="text-lg font-medium text-neutral-900 pl-10 mb-7">
+              Lista de aulas
+            </span>
+
+            <ModuleDropdownComponent
+              items={data?.items || []}
+              moduleName="Módulo 1"
+            />
+          </div> */}
+        </div>
+      </main>
+    </div>
   );
 }

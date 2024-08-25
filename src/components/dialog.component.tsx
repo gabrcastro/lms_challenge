@@ -1,4 +1,4 @@
-import { userSignOut } from "@/data/services/auth.service";
+import { userSignOut } from "@/data/services/auth/firebase_auth.service";
 import { useAuthStore } from "@/state/auth.store";
 import {
   Dialog,

@@ -18,7 +18,7 @@ export function ClassItemComponent({
         "py-3 border-b-[.5px] border-b-neutral-200 hover:bg-neutral-200 pl-10"
       )}
     >
-      {title}
+      <span className="w-full flex items-center justify-start">{title}</span>
     </button>
   );
 }

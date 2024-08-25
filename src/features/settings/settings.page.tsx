@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 export default function SettingsPage() {
   return (
     <main className="p-10 flex flex-col items-center">
-      <Card className="flex flex-col gap-3 w-3/4 h-min p-10 mb-20">
+      <Card className="flex flex-col gap-3 w-full md:w-3/4 h-min p-2 md:p-10 mb-20">
         <CardHeader>
           <CardTitle className="text-xl md:text-2xl font-medium text-neutral-900">
             Configurações
@@ -20,7 +20,7 @@ export default function SettingsPage() {
                 Conta
               </span>
               <form>
-                <fieldset className="flex w-full gap-2 mt-5">
+                <fieldset className="flex flex-col md:flex-row w-full gap-2 mt-5">
                   <div className="flex flex-col w-full gap-2">
                     <Label htmlFor="fullname">Nome Completo</Label>
                     <Input id="fullname" />
