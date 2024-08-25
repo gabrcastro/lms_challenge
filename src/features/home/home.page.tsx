@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchPlaylists } from "@/data/services/api/video.services";
 import { PlaylistListResponse } from "@/data/@types/playlists.types";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useSearchStore } from "@/state/search.store";
 
 export default function HomePage() {
   const { data, isLoading } = useQuery<PlaylistListResponse>({
@@ -17,6 +18,11 @@ export default function HomePage() {
     queryFn: fetchPlaylists,
   });
 
+  const searchTerm = useSearchStore((state) => state.searchTerm);
+
+  const filteredItems = data?.items.filter((item) =>
+    item.snippet.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <main className="p-10">
       <h1 className="text-xl font-medium text-neutral-950 mb-8">
@@ -29,9 +35,9 @@ export default function HomePage() {
           <Skeleton className="w-full h-56" />
           <Skeleton className="w-full h-56" />
         </div>
-      ) : (
+      ) : filteredItems && filteredItems.length > 0 ? (
         <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {data?.items.map((item) => (
+          {filteredItems.map((item) => (
             <NavLink
               to={"/course"}
               state={{
@@ -58,6 +64,10 @@ export default function HomePage() {
             </NavLink>
           ))}
         </div>
+      ) : (
+        <p className="text-center text-neutral-500">
+          Nenhum resultado encontrado.
+        </p>
       )}
     </main>
   );
