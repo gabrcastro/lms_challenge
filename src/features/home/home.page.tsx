@@ -57,7 +57,9 @@ export default function HomePage() {
                   />
                 </CardHeader>
                 <CardContent className="mt-5">
-                  <CardTitle className="mb-2">{item.snippet.title}</CardTitle>
+                  <CardTitle className="mb-2 capitalize">
+                    {item.snippet.title}
+                  </CardTitle>
                   <CardDescription>{item.snippet.description}</CardDescription>
                 </CardContent>
               </Card>

@@ -27,11 +27,11 @@ Basta adicionar um arquivo chamado <strong>.env</strong> no projeto juntamente c
 
 #### Rodar o projeto
 
-Após configurar tudo corretamente, basta executar o comando abaixo e poderá testar a aplicação.
+Após configurar tudo corretamente, basta executar o comando abaixo e poderá testar a aplicação. Lembre que o comando pode utilizar de acordo com o gerenciador de pacote que está utilizando.
 
-> pnpm run dev
+> pnpm dev
 
-A url da aplicação é
+A url da aplicação onde a aplicação estará rodando é
 
 > localhost:5173
 
