@@ -29,7 +29,7 @@ import {
 import { Button } from "./ui/button";
 import clsx from "clsx";
 import { useAuthStore } from "@/state/auth.store";
-import { userSignOut } from "@/data/services/auth.service";
+import { userSignOut } from "@/data/services/auth/firebase_auth.service";
 
 export function NavBarComponent() {
   const location = useLocation();
@@ -47,14 +47,19 @@ export function NavBarComponent() {
   }
 
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header
+      className={clsx(
+        currentPath == "/player" ? "hidden" : "flex",
+        "sticky top-0 h-16 items-center gap-4 border-b bg-background px-4 md:px-6"
+      )}
+    >
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <NavLink
           to="/"
-          className="flex items-center gap-2 text-lg font-semibold md:text-base"
+          className="flex items-center gap-2 text-lg font-semibold md:text-base mr-16"
         >
-          <PlaySquareIcon className="h-6 w-6" />
-          <span className="sr-only">MegaNews LMS</span>
+          <img src="logo.png" className="h-6 w-6" />
+          <span className="">LMS</span>
         </NavLink>
         <NavLink
           to="/"

@@ -9,8 +9,8 @@ import { VideoType } from "@/data/@types/video.type";
 
 export default function HistoryPage() {
   const videos: VideoType[] = [
-    { image: "/public/video_none.jpg", url: "/01", title: "Test Video 01" },
-    { image: "/public/video_none.jpg", url: "/02", title: "Test Video 02" },
+    { image: "/video_none.jpg", url: "/01", title: "Test Video 01" },
+    { image: "/video_none.jpg", url: "/02", title: "Test Video 02" },
   ];
 
   return (
@@ -22,7 +22,7 @@ export default function HistoryPage() {
         {videos.map((video) => (
           <Card className="p-0">
             <CardHeader className="p-0 overflow-hidden rounded-t-lg">
-              <img src="/public/video_none.jpg" alt="" />
+              <img src="/video_none.jpg" alt="" />
             </CardHeader>
             <CardContent className="mt-5">
               <CardTitle className="mb-2">{video.title}</CardTitle>

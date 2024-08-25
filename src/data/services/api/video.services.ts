@@ -1,5 +1,5 @@
-import { PlaylistItemListResponse } from "../@types/playlist.types";
-import { PlaylistListResponse } from "../@types/playlists.types";
+import { PlaylistItemListResponse } from "../../@types/playlist.types";
+import { PlaylistListResponse } from "../../@types/playlists.types";
 
 const API_KEY = "AIzaSyCx4xqAP9yTHD8jVzuVRmk3yl4vPFrDs_4";
 const API_URL = "https://www.googleapis.com/youtube/v3";

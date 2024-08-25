@@ -15,6 +15,7 @@
 - [Clsx]("https://www.npmjs.com/package/clsx")
 - [Lucide Icons]("https://lucide.dev/icons/")
 - [React Router Dom]("https://reactrouter.com/en/main")
+- [Firebase Authentication]("https://firebase.google.com/docs/auth")
 
 #### Anotações
 
