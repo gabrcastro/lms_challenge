@@ -6,6 +6,10 @@
     </div>
 </center>
 
+### Instalação
+
+Para testar a aplicação siga as instruções [aqui](./docs/installing.md)
+
 ### Bibliotecas utilizadas
 
 - [TanStack Query]("https://tanstack.com/query/latest")

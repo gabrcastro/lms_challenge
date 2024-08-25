@@ -1,9 +1,9 @@
 import { PlaylistItemListResponse } from "../../@types/playlist.types";
 import { PlaylistListResponse } from "../../@types/playlists.types";
 
-const API_KEY = "AIzaSyCx4xqAP9yTHD8jVzuVRmk3yl4vPFrDs_4";
-const API_URL = "https://www.googleapis.com/youtube/v3";
-const CHANNEL_ID = "UC2HgTOxuW_awwvEXSgNd_Yw";
+const API_KEY = import.meta.env.VITE_YT_API_KEY;
+const API_URL = import.meta.env.VITE_YT_API_URL;
+const CHANNEL_ID = import.meta.env.VITE_YT_CHANNEL_ID;
 
 export async function fetchPlaylists(): Promise<PlaylistListResponse> {
   try {
