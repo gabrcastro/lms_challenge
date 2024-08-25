@@ -1,5 +1,10 @@
 import { authFirebase } from "@/config/firebase.config";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 
@@ -33,6 +38,33 @@ export function googleSignIn(): Promise<void> {
       console.error("credential", credential);
       // ...
     });
+}
+
+const errorMessages: Record<string, string> = {
+  "auth/invalid-email": "O endereço de email é inválido.",
+  "auth/invalid-credential": "Verifique o email e senha.",
+  "auth/user-disabled": "Esta conta foi desativada.",
+  "auth/user-not-found": "Nenhuma conta encontrada com este email.",
+  "auth/wrong-password": "A senha está incorreta.",
+  "auth/too-many-requests":
+    "Houve muitas tentativas para entrar na sua conta. Aguarde alguns minutos e tente novamente.",
+};
+
+export async function signIn(email: string, password: string) {
+  try {
+    const auth = authFirebase;
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    const token = await result.user.getIdToken();
+    if (token) localStorage.setItem("token", token);
+  } catch (error) {
+    console.error(error);
+    if (error instanceof FirebaseError) {
+      const errorMessage =
+        errorMessages[error.code] || "An unexpected error occurred.";
+      throw new Error(errorMessage);
+    }
+    throw new Error("An unexpected error occurred.");
+  }
 }
 
 export async function userSignOut() {

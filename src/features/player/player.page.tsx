@@ -46,7 +46,7 @@ export default function PlayerPage() {
                 <iframe
                   title="videoplayer"
                   src={`https://www.youtube.com/embed/watch?v=tLKFoubznek&list=${courseId}&index=${selectedVideo}`}
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture;"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope;"
                   allowFullScreen
                   className="w-full h-max md:h-[70%] items-center justify-center"
                 />
